@@ -8,8 +8,10 @@
 var express = require('express');
 var app = express();
 
+// establish port to use
 var PORT = process.env.PORT || 3000;
 
+// setup express to handle data with urlencoded
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
@@ -20,6 +22,7 @@ require('./routing/apiRoutes')(app);
 require('./routing/htmlRoutes')(app);
 
 
-// establish connection
-// setup express to handle data with urlencoded
 // add listener
+app.listener(PORT, function (){
+    console.log("App listening on PORT: " + PORT);
+});
