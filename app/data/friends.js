@@ -1,7 +1,8 @@
 var friendArray = [
     {
         name: 'Link',
-        image: '###',
+        image: 'https://pbs.twimg.com/media/Cdrft_rXIAAQJCq.jpg',
+        
 
     }
 ];
