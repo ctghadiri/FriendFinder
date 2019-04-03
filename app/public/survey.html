@@ -225,18 +225,17 @@ $('.submit').on('click', function (event){
                 parseInt($('#q10').val()),
             ]
         };
-        console.log(newFriend);
         $.post('/api/friends', newFriend, function (data){
-            console.log(data)
 
                 var friendImg = $('<img>').attr('src', data.image);
-                friendImg.addClass('img-fluid')
+                friendImg.addClass('img-fluid');
                 $('.modal-body').html(friendImg);
                 $('.modal-title').html(data.name);
         });
     }
     else{
-        alert('Please fill out the form completely you filthy animal')
+        $('.modal-body').html('Please fill out the form completely, you filthy animal');
+        $('.modal-title').html('');
     }
 });
 
