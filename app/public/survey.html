@@ -28,7 +28,7 @@
             <div class="col-auto my-1">
                 <h2>Question 1</h2>
                 <h3>You got the touch!</h3>
-                <select class="custom-select mr-sm-2" id="q1 inlineFormCustomSelect">
+                <select class="custom-select mr-sm-2" id="q1">
                     <option selected>Choose...</option>
                     <option value="1">1 (Strongly Disagree)</option>
                     <option value="2">2</option>
@@ -42,7 +42,7 @@
             <div class="col-auto my-1">
                 <h2>Question 2</h2>
                 <h3>You got the power!Yeah!</h3>
-                <select class="custom-select mr-sm-2" id="q2 inlineFormCustomSelect">
+                <select class="custom-select mr-sm-2" id="q2">
                     <option selected>Choose...</option>
                     <option value="1">1 (Strongly Disagree)</option>
                     <option value="2">2</option>
@@ -56,7 +56,7 @@
             <div class="col-auto my-1">
                 <h2>Question 3</h2>
                 <h3>After all is said and done. You've never walked, you've never run.</h3>
-                <select class="custom-select mr-sm-2" id="q3 inlineFormCustomSelect">
+                <select class="custom-select mr-sm-2" id="q3">
                     <option selected>Choose...</option>
                     <option value="1">1 (Strongly Disagree)</option>
                     <option value="2">2</option>
@@ -70,7 +70,7 @@
             <div class="col-auto my-1">
                 <h2>Question 4</h2>
                 <h3>You're a winner!</h3>
-                <select class="custom-select mr-sm-2" id="q4 inlineFormCustomSelect">
+                <select class="custom-select mr-sm-2" id="q4">
                     <option selected>Choose...</option>
                     <option value="1">1 (Strongly Disagree)</option>
                     <option value="2">2</option>
@@ -84,7 +84,7 @@
             <div class="col-auto my-1">
                 <h2>Question 5</h2>
                 <h3>You got the moves.</h3>
-                <select class="custom-select mr-sm-2" id="q5 inlineFormCustomSelect">
+                <select class="custom-select mr-sm-2" id="q5">
                     <option selected>Choose...</option>
                     <option value="1">1 (Strongly Disagree)</option>
                     <option value="2">2</option>
@@ -98,7 +98,7 @@
             <div class="col-auto my-1">
                 <h2>Question 6</h2>
                 <h3>You know the streets.</h3>
-                <select class="custom-select mr-sm-2" id="q6 inlineFormCustomSelect">
+                <select class="custom-select mr-sm-2" id="q6">
                     <option selected>Choose...</option>
                     <option value="1">1 (Strongly Disagree)</option>
                     <option value="2">2</option>
@@ -112,7 +112,7 @@
             <div class="col-auto my-1">
                 <h2>Question 7</h2>
                 <h3>Break the rules, take the heat. You're nobody's fool</h3>
-                <select class="custom-select mr-sm-2" id="q7 inlineFormCustomSelect">
+                <select class="custom-select mr-sm-2" id="q7">
                     <option selected>Choose...</option>
                     <option value="1">1 (Strongly Disagree)</option>
                     <option value="2">2</option>
@@ -126,7 +126,7 @@
             <div class="col-auto my-1">
                 <h2>Question 8</h2>
                 <h3>You're at your best when when the going gets rough.</h3>
-                <select class="custom-select mr-sm-2" id="q8 inlineFormCustomSelect">
+                <select class="custom-select mr-sm-2" id="q8">
                     <option selected>Choose...</option>
                     <option value="1">1 (Strongly Disagree)</option>
                     <option value="2">2</option>
@@ -140,7 +140,7 @@
             <div class="col-auto my-1">
                 <h2>Question 9</h2>
                 <h3>You've been put to the test, but it's never enough.</h3>
-                <select class="custom-select mr-sm-2" id="q9 inlineFormCustomSelect">
+                <select class="custom-select mr-sm-2" id="q9">
                     <option selected>Choose...</option>
                     <option value="1">1 (Strongly Disagree)</option>
                     <option value="2">2</option>
@@ -154,7 +154,7 @@
             <div class="col-auto my-1">
                 <h2>Question 10</h2>
                 <h3>You got the Touch!</h3>
-                <select class="custom-select mr-sm-2" id="q10 inlineFormCustomSelect">
+                <select class="custom-select mr-sm-2" id="q10">
                     <option selected>Choose...</option>
                     <option value="1">1 (Strongly Disagree)</option>
                     <option value="2">2</option>
@@ -181,7 +181,6 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
               </div>
             </div>
@@ -196,36 +195,29 @@ $('.submit').on('click', function (event){
 
     var newFriend = {
         name: $('#name').val(),
-        imgURL: $('#image-url').val().trim(),
+        image: $('#image-url').val().trim(),
         scores: [
-            $('#q1').val(),
-            $('#q2').val(),
-            $('#q3').val(),
-            $('#q4').val(),
-            $('#q5').val(),
-            $('#q6').val(),
-            $('#q7').val(),
-            $('#q8').val(),
-            $('#q9').val(),
-            $('#q10').val(),
+            parseInt($('#q1').val()),
+            parseInt($('#q2').val()),
+            parseInt($('#q3').val()),
+            parseInt($('#q4').val()),
+            parseInt($('#q5').val()),
+            parseInt($('#q6').val()),
+            parseInt($('#q7').val()),
+            parseInt($('#q8').val()),
+            parseInt($('#q9').val()),
+            parseInt($('#q10').val()),
         ]
     };
     console.log(newFriend);
     $.post('/api/friends', newFriend, function (data){
         console.log(data)
-            var friendImg = $('<img>').attr('src', data[0].image);
+
+            var friendImg = $('<img>').attr('src', data.image);
             friendImg.addClass('img-fluid')
             $('.modal-body').html(friendImg);
-            $('.modal-title').html(data[0].name);
+            $('.modal-title').html(data.name);
     });
-    // for(var i = 0; i < friendArray.length; i++){
-    //     for(var j = 0; j < 10; i++){
-
-    //         friendArray[i].scores
-    //     }
-    // }
-
-    
 });
 
 
